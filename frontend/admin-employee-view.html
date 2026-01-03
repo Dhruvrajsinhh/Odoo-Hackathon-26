@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Employee View | HRMS</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{background:#f6f8fb;color:#0f172a}
+
+/* TOP BAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{font-weight:700;font-size:18px}
+nav a{
+  margin:0 12px;
+  cursor:pointer;
+  font-weight:500;
+}
+nav .active{
+  background:#0f172a;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+/* LAYOUT */
+.container{padding:40px}
+.title{font-size:42px;font-weight:700}
+.subtitle{color:#64748b;margin-top:6px}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+  margin-top:24px;
+}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+}
+th{color:#64748b}
+
+/* STATUS */
+.status{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+.present{background:#ecfdf5;color:#15803d}
+.absent{background:#fee2e2;color:#991b1b}
+
+/* BUTTON */
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a onclick="go('admin-dashboard.html')">Dashboard</a>
+    <a class="active">Employees</a>
+    <a onclick="go('admin-payroll.html')">Payroll</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1 class="title">Employee Attendance Overview</h1>
+  <p class="subtitle">Admin view – all employees</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Department</th>
+          <th>Status</th>
+          <th>Check In</th>
+          <th>Check Out</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dhruvrajsinh</td>
+          <td>Computer Engineering</td>
+          <td><span class="status present">Present</span></td>
+          <td>09:05 AM</td>
+          <td>06:02 PM</td>
+        </tr>
+        <tr>
+          <td>Anjali Patel</td>
+          <td>Civil Engineering</td>
+          <td><span class="status absent">Absent</span></td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:24px">
+    <button class="btn-primary" onclick="go('admin-dashboard.html')">
+      ← Back to Admin Dashboard
+    </button>
+  </div>
+</main>
+
+<script>
+function go(page){
+  window.location.href = page;
+}
+</script>
+
+</body>
+</html>

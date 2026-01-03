@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Profile | HRMS</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{
+  background:#f6f8fb;
+  color:#0f172a;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{font-weight:700;font-size:18px}
+nav a{
+  margin:0 12px;
+  cursor:pointer;
+  font-weight:500;
+}
+nav .active{
+  background:#0f172a;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+}
+
+/* ===== LAYOUT ===== */
+.container{padding:40px}
+.title{font-size:42px;font-weight:700}
+.subtitle{color:#64748b;margin-top:6px}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+  margin-top:24px;
+}
+
+/* ===== PROFILE HEADER ===== */
+.profile-header{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+.profile-pic{
+  width:110px;
+  height:110px;
+  border-radius:20px;
+  background:#e5e7eb;
+  object-fit:cover;
+  border:3px solid #e0e7ff;
+}
+.upload-btn{
+  display:inline-block;
+  margin-top:8px;
+  cursor:pointer;
+  color:#2563eb;
+  font-weight:600;
+  font-size:14px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+/* ===== FORM ===== */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+label{
+  font-size:13px;
+  font-weight:600;
+  color:#475569;
+}
+input, textarea{
+  width:100%;
+  margin-top:6px;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #e2e8f0;
+  font-size:14px;
+}
+textarea{resize:none}
+
+/* ===== BUTTONS ===== */
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-secondary{
+  background:#e0e7ff;
+  color:#1e3a8a;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+ <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a onclick="go('employee-dashboard.html')">Dashboard</a>
+    <a onclick="go('attendance.html')">Attendance</a>
+    <a onclick="go('leave.html')">Leave</a>
+    <a class="active">Profile</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1 class="title">My Profile</h1>
+  <p class="subtitle">Update your personal details</p>
+
+  <!-- PROFILE PHOTO -->
+  <div class="card">
+    <div class="profile-header">
+      <img src="" id="profileImage" class="profile-pic" alt="Profile Photo">
+      <div>
+        <strong>Dhruvrajsinh</strong><br>
+        <span class="upload-btn" onclick="triggerUpload()">Change Profile Photo</span>
+        <input type="file" id="photoInput" accept="image/*" hidden>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONAL DETAILS -->
+  <div class="card">
+    <h3>Personal Details</h3>
+
+    <div class="grid-2">
+      <div>
+        <label>Phone</label>
+        <input type="text" value="9999999999">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" value="employee@company.com" disabled>
+      </div>
+      <div>
+        <label>Address</label>
+        <textarea rows="2">Gujarat, India</textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-secondary">Reset</button>
+      <button class="btn-primary" onclick="saveProfile()">Save Changes</button>
+    </div>
+  </div>
+</main>
+
+<script>
+function go(page){
+  window.location.href = page;
+}
+
+/* ===== PHOTO UPLOAD ===== */
+const photoInput = document.getElementById("photoInput");
+const profileImage = document.getElementById("profileImage");
+
+function triggerUpload(){
+  photoInput.click();
+}
+
+photoInput.addEventListener("change", function(){
+  const file = this.files[0];
+  if(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      profileImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+/* ===== SAVE PROFILE ===== */
+function saveProfile(){
+  alert("Profile updated successfully (photo included)");
+}
+</script>
+
+</body>
+</html>

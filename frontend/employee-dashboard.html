@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Dashboard | Human Resource Management System</title>
+
+<style>
+/* ===== GLOBAL THEME ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{
+  background:#f6f8fb;
+  color:#0f172a;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{
+  font-weight:700;
+  font-size:18px;
+}
+nav a{
+  margin:0 12px;
+  cursor:pointer;
+  font-weight:500;
+}
+nav .active{
+  background:#0f172a;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  padding:40px;
+}
+.header{
+  margin-bottom:30px;
+}
+.title{
+  font-size:42px;
+  font-weight:700;
+}
+.subtitle{
+  margin-top:6px;
+  color:#64748b;
+}
+
+/* ===== GRID ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  margin-bottom:30px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:24px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.stat{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.stat h2{
+  margin-top:6px;
+  font-size:28px;
+}
+.muted{
+  color:#64748b;
+  font-size:14px;
+}
+
+/* ===== BUTTONS ===== */
+.primary-btn{
+  background:linear-gradient(135deg,#4f46e5,#4338ca);
+  color:#fff;
+  border:none;
+  padding:14px;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(79,70,229,.35);
+}
+.secondary-btn{
+  background:#f1f5f9;
+  border:none;
+  padding:14px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.full{
+  width:100%;
+}
+
+/* ===== QUICK ACTIONS ===== */
+.actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+/* ===== ACTIVITY ===== */
+.activity{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid #eef2f7;
+}
+.icon{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
+.green{background:#ecfdf5;color:#15803d;}
+.blue{background:#eef2ff;color:#4338ca;}
+.orange{background:#fff7ed;color:#c2410c;}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a class="active">Dashboard</a>
+    <a onclick="go('attendance.html')">Attendance</a>
+    <a onclick="go('leave.html')">Leave</a>
+    <a onclick="go('profile.html')">Profile</a>
+    <a onclick="go('payroll.html')">Payroll</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 class="title">Employee Dashboard</h1>
+    <p class="subtitle">
+      Overview of your work activity, attendance, and requests.
+    </p>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="muted">Today Status</div>
+      <h2>Present</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">This Month Attendance</div>
+      <h2>92%</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">Leaves Used</div>
+      <h2>4 / 12</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">Salary (Monthly)</div>
+      <h2>₹45,000</h2>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="grid">
+
+    <!-- QUICK ACTIONS -->
+    <div class="card">
+      <h3 style="margin-bottom:16px;">Quick Actions</h3>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="go('attendance.html')">
+          View Attendance
+        </button>
+
+        <button class="primary-btn" onclick="go('leave.html')">
+          Apply Leave
+        </button>
+
+        <button class="secondary-btn" onclick="go('profile.html')">
+          View Profile
+        </button>
+
+        <button class="secondary-btn" onclick="go('payroll.html')">
+          View Payroll
+        </button>
+      </div>
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+    <div class="card">
+      <h3 style="margin-bottom:16px;">Recent Activity</h3>
+
+      <div class="activity">
+        <div class="icon green">⏱</div>
+        <div>
+          <strong>Checked in</strong>
+          <div class="muted">Today at 09:05 AM</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="icon blue">📅</div>
+        <div>
+          <strong>Leave request submitted</strong>
+          <div class="muted">Pending approval</div>
+        </div>
+      </div>
+
+      <div class="activity">
+        <div class="icon orange">💰</div>
+        <div>
+          <strong>Payroll generated</strong>
+          <div class="muted">January 2026</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- LOGOUT -->
+  <div style="margin-top:30px;">
+    <button class="secondary-btn full" onclick="logout()">
+      Logout
+    </button>
+  </div>
+
+</main>
+
+<script>
+/* ===== NAVIGATION ===== */
+function go(page){
+  window.location.href = page;
+}
+
+/* ===== LOGOUT ===== */
+function logout(){
+  alert("Logged out (demo)");
+  window.location.href = "employee-dashboard.html";
+}
+</script>
+
+</body>
+</html>

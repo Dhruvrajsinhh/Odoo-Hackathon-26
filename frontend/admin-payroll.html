@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Payroll Control | HRMS</title>
+
+<style>
+/* ===== GLOBAL THEME ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{
+  background:#f6f8fb;
+  color:#0f172a;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{font-weight:700;font-size:18px;}
+nav a{
+  margin:0 12px;
+  cursor:pointer;
+  font-weight:500;
+}
+nav .active{
+  background:#0f172a;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+/* ===== LAYOUT ===== */
+.container{padding:40px;}
+.header{margin-bottom:30px;}
+.title{font-size:42px;font-weight:700;}
+.subtitle{margin-top:6px;color:#64748b;}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+  margin-bottom:24px;
+}
+.section-title{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:16px;
+}
+.muted{color:#64748b;font-size:14px;}
+
+/* ===== GRID ===== */
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+}
+th{color:#64748b;font-size:14px;}
+
+/* ===== FORM ===== */
+input{
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #e2e8f0;
+  font-size:14px;
+}
+
+/* ===== BUTTONS ===== */
+.primary-btn{
+  background:linear-gradient(135deg,#4f46e5,#4338ca);
+  color:#fff;
+  border:none;
+  padding:14px 22px;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(79,70,229,.35);
+}
+.secondary-btn{
+  background:#f1f5f9;
+  border:none;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:20px;
+}
+.total{
+  font-size:22px;
+  font-weight:700;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a onclick="go('admin-dashboard.html')">Dashboard</a>
+    <a onclick="go('admin-employee-view.html')">Employees</a>
+    <a class="active">Payroll</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 class="title">Admin Payroll Control</h1>
+    <p class="subtitle">
+      View and manage salary structures for all employees.
+    </p>
+  </div>
+
+  <!-- EMPLOYEE LIST -->
+  <div class="card">
+    <h3 class="section-title">Employee Payroll Overview</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Net Pay</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>226450307093</td>
+          <td>Dhruvrajsinh</td>
+          <td>Computer Engineering</td>
+          <td>₹42,500</td>
+          <td>
+            <button class="secondary-btn" onclick="openEditor()">
+              Edit Payroll
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAYROLL EDITOR -->
+  <div class="card" id="editor" style="display:none;">
+    <h3 class="section-title">Edit Salary Structure</h3>
+
+    <div class="grid-3">
+      <div>
+        <label>Basic Salary</label>
+        <input type="number" id="basic" value="35000">
+      </div>
+      <div>
+        <label>HRA</label>
+        <input type="number" id="hra" value="6000">
+      </div>
+      <div>
+        <label>Other Allowances</label>
+        <input type="number" id="allowance" value="4000">
+      </div>
+      <div>
+        <label>Provident Fund</label>
+        <input type="number" id="pf" value="2000">
+      </div>
+      <div>
+        <label>Professional Tax</label>
+        <input type="number" id="tax" value="500">
+      </div>
+    </div>
+
+    <div class="actions">
+      <div class="total">
+        Net Pay: ₹<span id="netPay">42500</span>
+      </div>
+      <div>
+        <button class="secondary-btn" onclick="closeEditor()">Cancel</button>
+        <button class="primary-btn" onclick="savePayroll()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+/* ===== NAVIGATION ===== */
+function go(page){
+  window.location.href = page;
+}
+
+/* ===== EDITOR ===== */
+function openEditor(){
+  document.getElementById("editor").style.display = "block";
+  calculate();
+}
+function closeEditor(){
+  document.getElementById("editor").style.display = "none";
+}
+
+/* ===== CALCULATION ===== */
+const inputs = ["basic","hra","allowance","pf","tax"];
+inputs.forEach(id=>{
+  document.getElementById(id)?.addEventListener("input",calculate);
+});
+
+function calculate(){
+  const basic = +document.getElementById("basic").value;
+  const hra = +document.getElementById("hra").value;
+  const allowance = +document.getElementById("allowance").value;
+  const pf = +document.getElementById("pf").value;
+  const tax = +document.getElementById("tax").value;
+
+  const net = basic + hra + allowance - pf - tax;
+  document.getElementById("netPay").innerText = net;
+}
+
+/* ===== SAVE ===== */
+function savePayroll(){
+  alert("Payroll updated successfully (demo)");
+  closeEditor();
+}
+</script>
+
+</body>
+</html>

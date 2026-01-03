@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | HRMS</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{
+  background:#f6f8fb;
+  color:#0f172a;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{
+  font-weight:700;
+  font-size:18px;
+}
+nav a{
+  margin:0 12px;
+  cursor:pointer;
+  font-weight:500;
+}
+nav .active{
+  background:#0f172a;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+/* ===== LAYOUT ===== */
+.container{padding:40px;}
+.header{margin-bottom:30px;}
+.title{font-size:42px;font-weight:700;}
+.subtitle{margin-top:6px;color:#64748b;}
+
+/* ===== GRID ===== */
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  margin-bottom:30px;
+}
+.grid-2{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:24px;
+}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.muted{
+  color:#64748b;
+  font-size:14px;
+}
+
+/* ===== LIST ===== */
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid #eef2f7;
+}
+.item:last-child{border-bottom:none;}
+
+/* ===== STATUS ===== */
+.status{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+.present{background:#ecfdf5;color:#15803d;}
+.absent{background:#fee2e2;color:#991b1b;}
+.pending{background:#fef3c7;color:#92400e;}
+.approved{background:#ecfdf5;color:#15803d;}
+.rejected{background:#fee2e2;color:#991b1b;}
+
+/* ===== BUTTONS ===== */
+.btn-primary{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-secondary{
+  background:#e0e7ff;
+  color:#1e3a8a;
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.full{width:100%;}
+</style>
+</head>
+
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="topbar">
+  <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a class="active">Dashboard</a>
+    <a onclick="go('admin-employee-view.html')">Employees</a>
+    <a onclick="go('admin-payroll.html')">Payroll</a>
+    <a onclick="go('admin-employee-view.html')">Attendance</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 class="title">Admin / HR Dashboard</h1>
+    <p class="subtitle">
+      Central control for employees, attendance, leave, and payroll.
+    </p>
+  </div>
+
+  <!-- STATS -->
+  <section class="grid-4">
+    <div class="card">
+      <div class="muted">Total Employees</div>
+      <h2>3</h2>
+    </div>
+    <div class="card">
+      <div class="muted">Present Today</div>
+      <h2>1</h2>
+    </div>
+    <div class="card">
+      <div class="muted">Absent Today</div>
+      <h2>1</h2>
+    </div>
+    <div class="card">
+      <div class="muted">Pending Leaves</div>
+      <h2 id="pendingCount">1</h2>
+    </div>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="grid-2">
+
+    <!-- EMPLOYEE LIST -->
+    <div class="card">
+      <h3>Employee List</h3>
+
+      <div class="item">
+        <div>
+          <strong>Dhruvrajsinh</strong>
+          <div class="muted">Computer Engineering</div>
+        </div>
+        <button class="btn-secondary"
+          onclick="go('admin-employee-view.html')">
+          View
+        </button>
+      </div>
+
+      <div class="item">
+        <div>
+          <strong>Anjali Patel</strong>
+          <div class="muted">Civil Engineering</div>
+        </div>
+        <button class="btn-secondary"
+          onclick="go('admin-employee-view.html')">
+          View
+        </button>
+      </div>
+
+      <button class="btn-secondary full"
+        onclick="go('admin-employee-view.html')">
+        View All Employees
+      </button>
+    </div>
+
+    <!-- TODAY ATTENDANCE -->
+    <div class="card">
+      <h3>Today’s Attendance</h3>
+
+      <div class="item">
+        <span>Dhruvrajsinh</span>
+        <span class="status present">Present</span>
+      </div>
+
+      <div class="item">
+        <span>Anjali Patel</span>
+        <span class="status absent">Absent</span>
+      </div>
+
+      <button class="btn-secondary full"
+        onclick="go('admin-employee-view.html')">
+        Full Attendance View
+      </button>
+    </div>
+
+  </section>
+
+  <!-- LEAVE APPROVALS -->
+  <div class="card" style="margin-top:24px;">
+    <h3>Leave Approvals</h3>
+
+    <div class="item" id="leaveRow">
+      <div>
+        <strong>Dhruvrajsinh</strong>
+        <div class="muted">Sick Leave · 05–06 Jan</div>
+      </div>
+
+      <div>
+        <span class="status pending" id="leaveStatus">Pending</span>
+
+        <button class="btn-primary"
+          onclick="approveLeave()">
+          Approve
+        </button>
+
+        <button class="btn-secondary"
+          onclick="rejectLeave()">
+          Decline
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYROLL -->
+  <div class="card" style="margin-top:24px;">
+    <h3>Payroll Management</h3>
+    <p class="muted">
+      View and update salary structures for all employees.
+    </p>
+
+    <button class="btn-primary"
+      onclick="go('admin-payroll.html')">
+      Open Payroll Control
+    </button>
+  </div>
+
+</main>
+
+<script>
+/* ===== NAVIGATION ===== */
+function go(page){
+  window.location.href = page;
+}
+
+/* ===== LEAVE APPROVAL (UI ONLY) ===== */
+function approveLeave(){
+  document.getElementById("leaveStatus").innerText = "Approved";
+  document.getElementById("leaveStatus").className = "status approved";
+  document.getElementById("pendingCount").innerText = "0";
+}
+
+function rejectLeave(){
+  document.getElementById("leaveStatus").innerText = "Rejected";
+  document.getElementById("leaveStatus").className = "status rejected";
+  document.getElementById("pendingCount").innerText = "0";
+}
+</script>
+
+</body>
+</html>

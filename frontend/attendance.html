@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Attendance | HRMS</title>
+
+<style>
+/* ===== GLOBAL THEME ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+body{
+  background:#f6f8fb;
+  color:#0f172a;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+.brand{font-weight:700;font-size:18px;}
+nav a{margin:0 12px;cursor:pointer;font-weight:500;}
+nav .active{
+  background:#0f172a;color:#fff;
+  padding:8px 14px;border-radius:10px;
+}
+/* ===== BRAND STYLING ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  font-size:16px;
+  color:#0f172a;
+}
+
+/* Blue icon badge (same as buttons) */
+.brand-icon{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#ffffff;
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  box-shadow:0 6px 16px rgba(37,99,235,0.4);
+  letter-spacing:0.5px;
+}
+
+/* ===== LAYOUT ===== */
+.container{padding:40px;}
+.header{margin-bottom:30px;}
+.title{font-size:42px;font-weight:700;}
+.subtitle{margin-top:6px;color:#64748b;}
+
+/* ===== STATS ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  margin-bottom:30px;
+}
+.stat{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+}
+.stat h2{margin-top:6px;font-size:26px;}
+.muted{color:#64748b;font-size:14px;}
+
+/* ===== CARD ===== */
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.05);
+  margin-bottom:24px;
+}
+
+/* ===== BUTTONS ===== */
+.primary-btn{
+  background:linear-gradient(135deg,#4f46e5,#4338ca);
+  color:#fff;border:none;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:15px;font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(79,70,229,.35);
+}
+.secondary-btn{
+  background:#f1f5f9;
+  border:none;
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+.actions{
+  display:flex;
+  gap:16px;
+  margin-top:16px;
+}
+
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+}
+th{color:#64748b;font-size:14px;}
+.status{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+}
+.present{background:#ecfdf5;color:#15803d;}
+.absent{background:#fee2e2;color:#991b1b;}
+.half{background:#fff7ed;color:#c2410c;}
+.leave{background:#eef2ff;color:#4338ca;}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+  <span class="brand-icon">HR</span>
+  Human Resource Management System
+</div>
+
+  <nav>
+    <a onclick="go('employee-dashboard.html')">Dashboard</a>
+    <a class="active">Attendance</a>
+    <a onclick="go('leave.html')">Leave</a>
+    <a onclick="go('profile.html')">Profile</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1 class="title">Attendance</h1>
+    <p class="subtitle">
+      Check in, check out, and track your attendance record.
+    </p>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stat">
+      <div class="muted">Present Days</div>
+      <h2 id="presentCount">0</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">Absent Days</div>
+      <h2 id="absentCount">0</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">Half Days</div>
+      <h2 id="halfCount">0</h2>
+    </div>
+    <div class="stat">
+      <div class="muted">Leave Days</div>
+      <h2 id="leaveCount">0</h2>
+    </div>
+  </section>
+
+  <!-- CHECK IN / OUT -->
+  <div class="card">
+    <h3>Today</h3>
+    <p class="muted" id="todayDate"></p>
+
+    <div class="actions">
+      <button class="primary-btn" onclick="checkIn()">Check In</button>
+      <button class="secondary-btn" onclick="checkOut()">Check Out</button>
+    </div>
+
+    <p class="muted" id="punchInfo" style="margin-top:12px;"></p>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="card">
+    <h3>Attendance History</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Check In</th>
+          <th>Check Out</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="attendanceTable"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<script>
+/* ===== NAVIGATION ===== */
+function go(page){
+  window.location.href = page;
+}
+
+/* ===== DATA ===== */
+let records = [];
+let checkedInTime = null;
+
+/* ===== DATE ===== */
+const today = new Date().toLocaleDateString();
+document.getElementById("todayDate").innerText = today;
+
+/* ===== CHECK IN ===== */
+function checkIn(){
+  if(checkedInTime){
+    alert("Already checked in");
+    return;
+  }
+  checkedInTime = new Date();
+  document.getElementById("punchInfo").innerText =
+    "Checked in at " + checkedInTime.toLocaleTimeString();
+}
+
+/* ===== CHECK OUT ===== */
+function checkOut(){
+  if(!checkedInTime){
+    alert("Please check in first");
+    return;
+  }
+
+  const outTime = new Date();
+  const hours =
+    (outTime - checkedInTime) / (1000 * 60 * 60);
+
+  let status = "Present";
+  if(hours < 4) status = "Half Day";
+
+  records.unshift({
+    date: today,
+    in: checkedInTime.toLocaleTimeString(),
+    out: outTime.toLocaleTimeString(),
+    status
+  });
+
+  checkedInTime = null;
+  document.getElementById("punchInfo").innerText =
+    "Checked out at " + outTime.toLocaleTimeString();
+
+  renderTable();
+}
+
+/* ===== RENDER ===== */
+function renderTable(){
+  const table = document.getElementById("attendanceTable");
+  table.innerHTML = "";
+
+  let present=0, absent=0, half=0, leave=0;
+
+  records.forEach(r=>{
+    if(r.status==="Present") present++;
+    if(r.status==="Absent") absent++;
+    if(r.status==="Half Day") half++;
+    if(r.status==="Leave") leave++;
+
+    table.innerHTML += `
+      <tr>
+        <td>${r.date}</td>
+        <td>${r.in}</td>
+        <td>${r.out}</td>
+        <td>
+          <span class="status ${
+            r.status==="Present"?"present":
+            r.status==="Half Day"?"half":"leave"
+          }">
+            ${r.status}
+          </span>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("presentCount").innerText = present;
+  document.getElementById("absentCount").innerText = absent;
+  document.getElementById("halfCount").innerText = half;
+  document.getElementById("leaveCount").innerText = leave;
+}
+</script>
+
+</body>
+</html>
