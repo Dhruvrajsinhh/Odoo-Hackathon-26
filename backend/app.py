@@ -1,6 +1,12 @@
-from firebase_config import db
+from flask import Flask, jsonify
+from flask_cors import CORS
 
-@app.route("/test-db")
-def test_db():
-    db.collection("test").add({"msg": "Firestore connected"})
-    return jsonify({"db": "connected"})
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/")
+def home():
+    return jsonify({"status": "Backend running successfully"})
+
+if __name__ == "__main__":
+    app.run(debug=True)
