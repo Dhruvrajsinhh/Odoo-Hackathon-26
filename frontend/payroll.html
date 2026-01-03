@@ -47,6 +47,53 @@ nav .active{
   font-size:16px;
   color:#0f172a;
 }
+.company-brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  justify-content:center;
+  margin-bottom:30px;
+}
+
+/* Logo circle */
+.logo-badge{
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:1px;
+  box-shadow:0 12px 30px rgba(37,99,235,.45);
+}
+
+/* Text container */
+.brand-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+/* Company name */
+.brand-name{
+  font-size:26px;
+  font-weight:900;
+  color:#0f172a;
+  letter-spacing:.5px;
+}
+
+/* Tagline */
+.brand-tagline{
+  font-size:13px;
+  font-weight:600;
+  color:#2563eb;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
 
 /* Blue icon badge (same as buttons) */
 .brand-icon{
@@ -128,9 +175,12 @@ nav .active{
 
 <!-- TOP BAR -->
 <header class="topbar">
- <div class="brand">
-  <span class="brand-icon">HR</span>
-  Human Resource Management System
+<div class="company-brand">
+  <span class="logo-badge">GL</span>
+  <div class="brand-text">
+    <span class="brand-name">Global Legacy LLC</span>
+    <span class="brand-tagline">Human Resource Management System</span>
+  </div>
 </div>
 
   <nav>
